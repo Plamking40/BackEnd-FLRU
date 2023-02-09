@@ -5,22 +5,33 @@ let express = require("express"),
   dbConfig = require("./database/db");
 path = require("path");
 const moment = require("moment");
+require("dotenv").config();
 
 // Express Route
-const usersRoute = require("../backend/routes/users.route");
-const questionRoute = require("../backend/routes/question.route");
-const questsRoute = require("../backend/routes/quests.route");
-const levelsRoute = require("../backend/routes/levels.route");
-const rankcomparesRoute = require("../backend/routes/rankcompares.rote");
-const coursesRoute = require("../backend/routes/courses.route");
+const usersRoute = require("./routes/users.route");
+const questionRoute = require("./routes/question.route");
+const questsRoute = require("./routes/quests.route");
+const levelsRoute = require("./routes/levels.route");
+const rankcomparesRoute = require("./routes/rankcompares.rote");
+const coursesRoute = require("./routes/courses.route");
 
 // Connecting MongDB Database
-mongoose.Promise = global.Promise;
+const {
+  MONGODB_USERNAME,
+  MONGODB_PASSWORD,
+  MONGODB_DEFAULT,
+  MONGODB_DATABASE,
+} = process.env;
+
+// mongoose.Promise = global.Promise;
 mongoose
-  .connect(dbConfig.db, {
-    useNewUrlParser: true,
-    // useUnifiedTopology: true
-  })
+  .connect(
+    `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@${MONGODB_DEFAULT}/${MONGODB_DATABASE}`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(
     () => {
       console.log("Database successfully connected");
@@ -54,7 +65,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // PORT
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8080;
 const server = app.listen(port, () => {
   console.log("Connected to port " + port);
 });

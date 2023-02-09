@@ -116,13 +116,17 @@ router.route("/get-edit-user/:id").get(async (req, res) => {
 });
 
 // login user
-router.route("/login-user").get(async (req, res) => {
-  // console.log(req.body.user_id + " " + req.body.password);
-  // await usersSchema.findOne({
-  //   user_id: req.body.user_id,
-  //   password: req.body.password,
-  // });
-  return res.json({ mes: "success" });
+router.route("/login-user").post(async (req, res) => {
+  const username = req.body.user_id;
+  const password = req.body.password;
+  try {
+    const user = await usersSchema.findOne({ user_id: username });
+    if (!user) throw new Error();
+    if (user.password !== password) throw new Error();
+    return res.json({ user_id: user.user_id, Role: user.status });
+  } catch (error) {
+    return res.json({ success: false });
+  }
 });
 
 module.exports = router;
