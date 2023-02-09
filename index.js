@@ -7,12 +7,12 @@ path = require("path");
 const moment = require("moment");
 
 // Express Route
-const usersRoute = require("../backend/routes/users.route");
-const questionRoute = require("../backend/routes/question.route");
-const questsRoute = require("../backend/routes/quests.route");
-const levelsRoute = require("../backend/routes/levels.route");
-const rankcomparesRoute = require("../backend/routes/rankcompares.rote");
-const coursesRoute = require("../backend/routes/courses.route");
+const usersRoute = require("./routes/users.route");
+const questionRoute = require("./routes/question.route");
+const questsRoute = require("./routes/quests.route");
+const levelsRoute = require("./routes/levels.route");
+const rankcomparesRoute = require("./routes/rankcompares.rote");
+const coursesRoute = require("./routes/courses.route");
 
 // Connecting MongDB Database
 mongoose.Promise = global.Promise;
