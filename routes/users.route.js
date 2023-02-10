@@ -7,7 +7,6 @@ let usersSchema = require("../models/Users");
 
 // Create Student
 router.route("/create-users").post((req, res, next) => {
-  // res.json({ msg: "Data Saved Successfully...." });
   usersSchema.create(req.body, (error, data) => {
     if (error) {
       return next(error);
@@ -123,7 +122,11 @@ router.route("/login-user").post(async (req, res) => {
     const user = await usersSchema.findOne({ user_id: username });
     if (!user) throw new Error();
     if (user.password !== password) throw new Error();
-    return res.json({ user_id: user.user_id, Role: user.status });
+    return res.json({
+      user_id: user.user_id,
+      Role: user.status,
+      success: true,
+    });
   } catch (error) {
     return res.json({ success: false });
   }
