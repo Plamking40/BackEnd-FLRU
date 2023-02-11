@@ -11,7 +11,6 @@ router.route("/create-question").post((req, res, next) => {
     if (error) {
       return next(error);
     } else {
-      console.log(data);
       res.json(data);
     }
   });
@@ -40,7 +39,7 @@ router.route("/QuizUser").get(async (req, res) => {
       },
     },
   ]);
-  console.log(data);
+
   return res.json(data);
 });
 
@@ -64,7 +63,6 @@ router.route("/AllQuiz").get(async (req, res) => {
       type: 1,
     }
   );
-  console.log(data);
   return res.json(data);
 });
 

@@ -11,10 +11,28 @@ router.route("/create-users").post((req, res, next) => {
     if (error) {
       return next(error);
     } else {
-      console.log(data);
       res.json(data);
     }
   });
+});
+
+// Create Student V.2
+router.route("/create-usersv2").post((req, res, next) => {
+  const username = req.body.user_id;
+  const password = req.body.password;
+  const firstname = req.body.firstname;
+  const lastname = req.body.lastname;
+  const email = req.body.email;
+  const tel = req.body.tel;
+
+  try {
+    if (username) {
+      usersSchema.findOne({ user_id: username });
+    }
+    return res.json({ success: true });
+  } catch (error) {
+    return res.json({ success: false });
+  }
 });
 
 // Read students
@@ -126,6 +144,7 @@ router.route("/login-user").post(async (req, res) => {
       user_id: user.user_id,
       Role: user.status,
       success: true,
+      name: user.firstname + " " + user.lastname,
     });
   } catch (error) {
     return res.json({ success: false });
