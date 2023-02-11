@@ -24,15 +24,26 @@ router.route("/create-usersv2").post((req, res, next) => {
   const lastname = req.body.lastname;
   const email = req.body.email;
   const tel = req.body.tel;
-
-  try {
-    if (username) {
-      usersSchema.findOne({ user_id: username });
-    }
-    return res.json({ success: true });
-  } catch (error) {
-    return res.json({ success: false });
+  const user = usersSchema.findOne({ user_id: username });
+  if (!user) {
+    return res.json({ mes: "User already exists" });
   }
+
+  // console.log(user);
+  // if (!user) {
+  //   usersSchema.create(req.body, (error, data) => {
+  //     if (error) {
+  //       return next(error);
+  //     } else {
+  //       res.json(data);
+  //     }
+  //   });
+  // } else {
+  //   return res.json({
+  //     status: 400,
+  //     msg: "User already exists",
+  //   });
+  // }
 });
 
 // Read students
