@@ -24,6 +24,9 @@ let usersSchema = new Schema(
     tel: {
       type: String,
     },
+    token: {
+      type: String,
+    },
   },
   {
     collection: "users",

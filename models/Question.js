@@ -27,6 +27,7 @@ let questionSchema = new Schema(
     rankType: {
       type: String,
     },
+    questions: Array,
   },
   {
     collection: "question",

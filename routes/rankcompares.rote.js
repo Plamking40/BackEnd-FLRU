@@ -25,4 +25,24 @@ router.route("/edit-compares/:id").get((req, res) => {
   });
 });
 
+router.put("/update-users/:id", (req, res, next) => {
+  usersSchema.findByIdAndUpdate(
+    req.body._id,
+    {
+      $set: {
+        name: req.body.name,
+        min: req.body.min,
+        max: req.body.max,
+      },
+    },
+    (error) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.json({ status: 200, msg: "Users updated successfully" });
+      }
+    }
+  );
+});
+
 module.exports = router;

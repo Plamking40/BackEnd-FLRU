@@ -8,12 +8,13 @@ const moment = require("moment");
 require("dotenv").config();
 
 // Express Route
-const usersRoute = require("./routes/users.route");
+const userRoutes = require("./routes/users.route");
 const questionRoute = require("./routes/question.route");
 const questsRoute = require("./routes/quests.route");
 const levelsRoute = require("./routes/levels.route");
 const rankcomparesRoute = require("./routes/rankcompares.rote");
 const coursesRoute = require("./routes/courses.route");
+const QuizHistoryRoutes = require("./routes/QuizHistory.route");
 
 // Connecting MongDB Database
 const {
@@ -49,12 +50,13 @@ app.use(
   })
 );
 app.use(cors());
-app.use("/users", usersRoute);
+app.use("/users", userRoutes);
 app.use("/question", questionRoute);
 app.use("/quests", questsRoute);
 app.use("/levels", levelsRoute);
 app.use("/rankcompares", rankcomparesRoute);
 app.use("/courses", coursesRoute);
+app.use("/QuizHistory", QuizHistoryRoutes);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../build")));

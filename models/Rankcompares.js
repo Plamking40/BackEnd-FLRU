@@ -9,11 +9,7 @@ let rankcomparesSchema = new Schema(
     rank: [
       {
         name: { type: String },
-      },
-      {
         min: { type: String },
-      },
-      {
         max: { type: String },
       },
     ],
