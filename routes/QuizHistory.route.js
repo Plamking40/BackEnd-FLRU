@@ -7,7 +7,7 @@ const router = express.Router();
 let QuizHistorySchema = require("../models/QuizHistory");
 let QuestionSchema = require("../models/Question");
 let RankcomparesSchema = require("../models/Rankcompares");
-let SuggestionsSchema = require("../models/Suggestions");
+// let SuggestionsSchema = require("../models/Suggestions");
 
 router.post("/get-History", async (req, res, next) => {
   const history = await QuizHistorySchema.aggregate([
