@@ -209,7 +209,7 @@ router.post("/login-user", async (req, res) => {
 router.get("/profile", auth, async (req, res) => {
   console.log(req.user);
   const user = await usersSchema.findOne(
-    { user_id: req.user.user_id },
+    { user_id: req.user.user_id, password: req.user.password },
     { password: 0 }
   );
   return res.json({
