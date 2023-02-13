@@ -196,7 +196,7 @@ router.post("/login-user", async (req, res) => {
 
     if (!(await comparePassword(password, user.password))) {
       // user
-      return res.status(401).send("Invalid Credentials");
+      return res.status(401).json({ mes: "Invalid Credentials" });
     }
 
     // Create token
