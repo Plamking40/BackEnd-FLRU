@@ -184,22 +184,33 @@ router.post("/login-user", async (req, res) => {
 
     const user = await usersSchema.findOne({ user_id: username });
 
-    if (user && bcrypt.compare(password, user.password)) {
-      // Create token
-      const token = jwt.sign(
-        { user_id: user.user_id, email: user.email },
-        process.env.TOKEN_KEY,
-        {
-          expiresIn: "2h",
-        }
-      );
-      // save user token
-      user.token = token;
+    comparePassword = async (password, existsPassword) => {
+      const isPasswordCompare = await bcrypt.compare(password, existsPassword);
 
+      if (!isPasswordCompare) {
+        return false;
+      } else {
+        return true;
+      }
+    };
+
+    if (!(await comparePassword(password, user.password))) {
       // user
-      res.status(200).json(user);
+      return res.status(401).send("Invalid Credentials");
     }
-    res.status(401).send("Invalid Credentials");
+
+    // Create token
+    const token = jwt.sign(
+      { user_id: user.user_id, email: user.email },
+      process.env.TOKEN_KEY,
+      {
+        expiresIn: "2h",
+      }
+    );
+    // save user token
+    user.token = token;
+
+    return res.status(200).json({ token });
   } catch (err) {
     console.log(err);
   }
