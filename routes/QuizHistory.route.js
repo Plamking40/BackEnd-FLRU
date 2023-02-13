@@ -108,7 +108,6 @@ router.post("/get-History", async (req, res, next) => {
             scoreReading: scoreReading,
             rankType: rankType,
             Compares: Compares,
-            Suggestions: Compares,
           });
         }
       }
