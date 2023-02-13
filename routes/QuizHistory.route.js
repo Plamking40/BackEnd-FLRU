@@ -7,7 +7,7 @@ const router = express.Router();
 let QuizHistorySchema = require("../models/QuizHistory");
 let QuestionSchema = require("../models/Question");
 let RankcomparesSchema = require("../models/Rankcompares");
-// let SuggestionsSchema = require("../models/Suggestions");
+// let SuggestionSchema = require("../models/Suggestions");
 
 router.post("/get-History", async (req, res, next) => {
   const history = await QuizHistorySchema.aggregate([
@@ -44,7 +44,6 @@ router.post("/get-History", async (req, res, next) => {
   router.post("/create-QuizHistory", async (req, res, next) => {
     const quiz = await QuestionSchema.findById(req.body.Quiz_id);
     const ranks = await RankcomparesSchema.findOne({ compares: quiz.rankType });
-    const suggestions = await SuggestionsSchema.findOne({ quiz_id: quiz._id });
 
     let score = 0;
     let scoreListening = 0;
