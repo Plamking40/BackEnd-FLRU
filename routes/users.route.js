@@ -43,7 +43,7 @@ router.post("/create-usersv2", async (req, res, next) => {
     const UserRole = await usersSchema.findOne({ user_id: user_id });
 
     if (UserRole) {
-      return res.status(409).send("User Already Exist. Please Login");
+      return res.json({ mes: "User Already Exist. Please Login" });
     }
 
     encryptedPassword = await bcrypt.hash(password, 10);
