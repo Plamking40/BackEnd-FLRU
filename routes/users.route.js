@@ -218,4 +218,15 @@ router.get("/profile", auth, async (req, res) => {
   });
 });
 
+//
+
+router.post("/login-profile", async (req, res) => {
+  const username = req.body.user_id;
+  const data = await usersSchema.findOne(
+    { _id: req.params.id },
+    { password: 0 }
+  );
+  return res.json(data);
+});
+
 module.exports = router;
