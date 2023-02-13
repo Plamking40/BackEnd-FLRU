@@ -5,6 +5,7 @@ let QuizHistorySchema = new Schema(
   {
     user_id: String,
     options: Object,
+    score: Number,
     Quiz_id: mongoose.ObjectId,
     created_at: { type: Date, default: Date.now },
     updated_at: { type: Date, default: Date.now },
