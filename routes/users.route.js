@@ -13,6 +13,7 @@ const auth = require("../middleware/auth");
 router.post("/welcome", auth, (req, res) => {
   res.status(200).send("Welcome 🙌 ");
 });
+
 // Create Student
 router.post("/create-users", (req, res, next) => {
   const { user_id, password, firstname, lastname, status, email, tel } =
@@ -229,8 +230,6 @@ router.get("/profile", auth, async (req, res) => {
   });
 });
 
-//
-
 router.post("/login-profile", async (req, res) => {
   const username = req.body.user_id;
   const data = await usersSchema.findOne(
@@ -238,6 +237,27 @@ router.post("/login-profile", async (req, res) => {
     { password: 0 }
   );
   return res.json(data);
+});
+
+router.put("/edit-users-profile", (req, res, next) => {
+  usersSchema.findByIdAndUpdate(
+    req.body.user_id,
+    {
+      $set: {
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        tel: req.body.tel,
+      },
+    },
+    (error) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.json({ status: 200, msg: "Users updated successfully" });
+      }
+    }
+  );
 });
 
 module.exports = router;
