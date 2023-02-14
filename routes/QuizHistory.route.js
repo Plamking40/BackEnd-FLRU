@@ -50,7 +50,7 @@ router.post("/get-History", async (req, res, next) => {
     let scoreSpeaking = 0;
     let scoreWriting = 0;
     let scoreReading = 0;
-    let rankType = "";
+    let rankType = quiz.rankType;
     let Compares = "";
     let i = 0;
     while (i < quiz.questions.length) {
@@ -69,10 +69,6 @@ router.post("/get-History", async (req, res, next) => {
         }
       }
       i++;
-    }
-
-    if (ranks.compares == quiz.rankType) {
-      rankType = quiz.rankType;
     }
 
     let k = 0;
