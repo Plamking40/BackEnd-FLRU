@@ -16,6 +16,7 @@ const rankcomparesRoute = require("./routes/rankcompares.rote");
 const coursesRoute = require("./routes/courses.route");
 const QuizHistoryRoutes = require("./routes/QuizHistory.route");
 const SignInOutRoutes = require("./routes/Signinout.route");
+const ReserveMiniCoursesRoutes = require("./routes/ReserveMiniCourses.route");
 
 // Connecting MongDB Database
 const {
@@ -59,6 +60,7 @@ app.use("/rankcompares", rankcomparesRoute);
 app.use("/courses", coursesRoute);
 app.use("/QuizHistory", QuizHistoryRoutes);
 app.use("/Signinout", SignInOutRoutes);
+app.use("/ReserveMiniCourses", ReserveMiniCoursesRoutes);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../build")));
